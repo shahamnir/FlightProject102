@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'AnonymousApp.apps.AnonymousappConfig',
     'CustomerApp.apps.CustomerappConfig',
+    'corsheaders',
     'AdminApp.apps.AdminappConfig',
     'AirlineApp.apps.AirlineappConfig',
     'django.contrib.admin',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -141,3 +144,45 @@ AUTH_USER_MODEL = "AdminApp.User"
 
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    
+]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20
+}
+
+CSRF_COOKIE_NAME = "csrftoken"
+
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
+
+CSRF_COOKIE_HTTPONLY = True
+
+CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
+
+CSRF_COOKIE_NAME = 'X-CSRFTOKEN'
+
+CORS_ALLOW_HEADERS = [
+    'X-CSRFTOKEN',
+    'csrftoken',
+    'X-XSRF-TOKEN',
+    'content-type',
+    'x-requested-with',
+    'Authorization',
+    'Set-Cookie'
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+
+CSRF_COOKIE_DOMAIN = 'http://192.168.56.1:3000' 
+
+CSRF_COOKIE_PATH = 'http://localhost:3000'
+
+SESSION_COOKIE_DOMAIN = 'http://localhost:3000'

@@ -1,8 +1,6 @@
-from typing import Any
 from django.db import models
 from AdminApp.models import User
 from AirlineApp.models import Flights
-
 
 
 class Custumer(models.Model):
@@ -14,12 +12,12 @@ class Custumer(models.Model):
     address = models.CharField(max_length=100)
     phone_no = models.CharField(max_length=100)
     credit_card_no = models.CharField(max_length=100)
-    user = models.OneToOneField(User,on_delete=models.CASCADE,default=3)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=3)
 
 
 class Ticket(models.Model):
-    flight = models.ForeignKey(Flights,on_delete=models.CASCADE)
-    customer = models.ForeignKey(Custumer,on_delete=models.CASCADE)
+    flight = models.ForeignKey(Flights, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Custumer, on_delete=models.CASCADE)
 
 
 

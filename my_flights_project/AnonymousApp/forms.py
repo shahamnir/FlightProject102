@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from AdminApp.models import User
 
 
-
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
 

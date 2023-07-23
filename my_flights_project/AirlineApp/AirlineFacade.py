@@ -1,95 +1,48 @@
-from .models import Flights,Country,Airline
-from django.utils import timezone
-from datetime import timedelta, datetime
+from .models import Flights, Airline
+from .serializers import FlightSerializer, AirlineSerializer
+from rest_framework.response import Response
 
 
+class AirlineFacade():
 
-def get_all_flights():
-    flights = Flights.objects.all()
-    return flights
+    def update_airline(request, pk):
+        airline = Airline.objects.get(pk=pk)
+        serializer = AirlineSerializer(airline, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response = Response(serializer.data, status=200)
+        else:
+            response = Response(serializer.errors, status=400)
+        return response
 
-def get_flight_by_id(id):
-    flight = Flights.objects.get(id)
-    return flight
+    def add_flight(request):
+        serializer = FlightSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response = Response(serializer.data, status=201)
+        else:
+            response = Response(serializer.errors, status=400)
+        return response
+    
+    def update_flight(request, pk):
+        flight = Flights.objects.get(pk=pk)
+        serializer = FlightSerializer(flight, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response = Response(serializer.data, status=200)
+        else:
+            response = Response(serializer.errors, status=400)
+        return response
 
-def get_flights_by_params(origin_country_id,destination_country_id,departure_time):
-    flight = Flights.objects.filter(origin_country_id=origin_country_id,
-                                    destination_country_id=destination_country_id,
-                                    departure_time=departure_time)
-    return flight
+    def get_my_flights(request):
+        airline_id = request.data.get('airline_id')
+        flights = Flights.objects.filter(airline_id=airline_id)
+        serializer = FlightSerializer(flights, many=True)
+        response = Response(serializer.data, status=200)
+        return response
 
-def get_all_airlines():
-    airlines = Airline.objects.all()
-    return airlines
-
-def get_airline_by_id(id):
-    airline = Airline.objects.get(id)
-    return airline
-
-def get_airlines_by_params(name, country):
-    airline = Airline.objects.filter(name=name,country=country)
-    return airline
-
-def get_all_countries():
-    countries = Country.objects.all()
-    return countries
-
-def get_country_by_id(id):
-    country = Country.objects.get(id)
-    return country
-
-def update_airline(airline):
-    pass
-
-def add_flight(flight):
-    pass
-
-def update_flight(flight):
-    pass
-
-def remove_flight(flight):
-    pass
-
-def get_my_flights():
-    pass
-
-
-def get_airline_by_username(username):
-    airline = Airline.objects.filter(username=username)
-    return airline
-
-
-def get_flights_by_airline(airline_id):
-    flights = Flights.objects.filter(airline_id=airline_id)
-    return flights
-
-
-
-def get_arrival_flights(destination_country):
-    current_time = timezone.now()
-    time_limit = current_time + timedelta(hours=12)
-    flights = Flights.objects.filter(landing_time__gte=current_time,
-                                     landing_time__lte=time_limit,
-                                     destination_country=destination_country)
-    return flights
-
-def get_departure_flights(origin_country):
-    current_time = timezone.now()
-    time_limit = current_time + timedelta(hours=12)
-    flights = Flights.objects.filter(departure_time__gte=current_time,
-                                     departure_time__lte=time_limit,
-                                     origin_country=origin_country)
-    return flights
-
-
-
-def get_departure_date(flight):
-    departure_time_str = flight.departure_time
-    departure_time = datetime.strptime(departure_time_str, '%Y-%m-%dT%H:%M:%SZ')
-    departure_date = departure_time.date()
-
-    return departure_date
-
-
-
-
+    def remove_flight(request, pk):
+        flight = Flights.objects.get(pk=pk)
+        flight.delete()
+        response = Response(status=200)
+        return response

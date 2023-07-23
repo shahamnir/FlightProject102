@@ -19,10 +19,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('airline_company/',include('AirlineApp.urls')),
-    path('administrator/',include('AdminApp.urls')),
-    path('customer/',include('CustomerApp.urls')),
-    path('anonymous/',include('AnonymousApp.urls')),
+    path('airline_company/', include('AirlineApp.urls')),
+    path('administrator/', include('AdminApp.urls')),
+    path('customer/', include('CustomerApp.urls')),
+    path('anonymous/', include('AnonymousApp.urls')),
     path('', include('django.contrib.auth.urls')),
 
 ]
