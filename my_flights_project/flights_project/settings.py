@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -140,10 +141,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "AdminApp.User"
 
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
+
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
@@ -157,6 +158,7 @@ REST_FRAMEWORK = {
 }
 
 CSRF_COOKIE_NAME = "csrftoken"
+
 
 CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
@@ -186,3 +188,4 @@ CSRF_COOKIE_DOMAIN = 'http://192.168.56.1:3000'
 CSRF_COOKIE_PATH = 'http://localhost:3000'
 
 SESSION_COOKIE_DOMAIN = 'http://localhost:3000'
+

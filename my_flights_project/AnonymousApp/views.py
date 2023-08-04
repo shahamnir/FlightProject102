@@ -6,6 +6,10 @@ from .FacadeBase import FacadeBase
 from rest_framework.response import Response
 
 
+"""
+FacadeBase Views:
+"""
+
 class GetAllFlights(APIView):
     def get(self, request):
         response = FacadeBase.get_all_flights(request)
@@ -59,6 +63,10 @@ class AddCustomer(APIView):
         response = FacadeBase.add_customer(request)
         return response
 
+
+"""
+Login and register views:
+"""
 
 class LoginView(APIView):
     def post(self, request):

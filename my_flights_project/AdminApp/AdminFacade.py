@@ -9,12 +9,18 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 class AdminFacade():
+    """
+    Method to get all customers from the database and return them as a serialized response.
+    """
     def get_all_customers(request):
         customers = Custumer.objects.all()
-        serializer = CustomerSerializer(customers, many=True)
+        serializer = CustomerSerializer(customers, many=True) 
         response = Response(serializer.data, status=200)
         return response
-      
+    
+    """
+    Method to add a new airline to the database and return the serialized data of the created airline as a response.
+    """
     @csrf_exempt
     def add_airline(request):
         serializer = AirlineSerializer(data=request.data)
@@ -43,6 +49,9 @@ class AdminFacade():
             response = Response(serializer.errors, status=400)
         return response
 
+    """
+    The Function removes an airline from the database based on the provided 'pk'.
+    """
     def remove_airline(request, pk):
         airline = Airline.objects.get(pk=pk)
         airline.delete()

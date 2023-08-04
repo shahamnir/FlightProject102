@@ -21,6 +21,9 @@ class AirlineSerializer(serializers.ModelSerializer):
         model = Airline
         fields = '__all__'
 
+    """
+    Uses create method to handle airline instance creation in order to create User instance when one created.
+    """
     def create(self, validated_data):
         user_role = UserRole.objects.get(id=2)
         user = User.objects.create(

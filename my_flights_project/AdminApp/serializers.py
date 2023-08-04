@@ -21,6 +21,10 @@ class AdministratorSerializer(serializers.ModelSerializer):
         model = Administrator
         fields = '__all__'
 
+
+    """
+    Uses create method to handle administrator instance creation in order to create User instance too
+    """
     def create(self, validated_data):
         user_role = UserRole.objects.get(id=1)
         user = User.objects.create(

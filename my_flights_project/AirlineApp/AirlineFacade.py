@@ -5,6 +5,9 @@ from rest_framework.response import Response
 
 class AirlineFacade():
 
+    """
+    Update airline instance according to a pk
+    """
     def update_airline(request, pk):
         airline = Airline.objects.get(pk=pk)
         serializer = AirlineSerializer(airline, request.data)

@@ -51,6 +51,10 @@ class GetUserByUsername(APIView):
         return response
 
 
+"""
+Admin Facade Views:
+"""
+
 class GetAllCustomers(APIView):
     def get(self, request):
         response = AdminFacade.get_all_customers(request)

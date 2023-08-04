@@ -4,7 +4,9 @@ from datetime import timedelta, datetime
 from .serializers import FlightSerializer, AirlineSerializer, CountrySerializer
 from rest_framework.response import Response
 
-
+"""
+Get a
+"""
 def get_airline_by_username(request):
     username = request.data.get('username')
     airline = Airline.objects.filter(username=username)
@@ -42,6 +44,9 @@ def get_flights_by_airline(request):
     return response
 
 
+"""
+Function to get flights arriving within the next 12 hours in a specific destination country
+"""
 def get_arrival_flights(request):
     destination_country = request.data.get('destination_country')
     current_time = timezone.now()
@@ -53,7 +58,9 @@ def get_arrival_flights(request):
     response = Response(serializer.data, status=200)
     return response
 
-
+"""
+Function to get flights departing within the next 12 hours from a specific origin country
+"""
 def get_departure_flights(request):
     origin_country = request.data.get('origin_country')
     current_time = timezone.now()

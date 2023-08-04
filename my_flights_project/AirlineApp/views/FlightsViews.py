@@ -23,6 +23,10 @@ class FlightDetails(RetrieveUpdateDestroyAPIView):
     serializer_class = FlightSerializer
 
 
+"""
+Airline Facade Views:
+"""
+
 class AddFlight(APIView):
     def post(self, request):
         response = AirlineFacade.add_flight(request)
@@ -44,6 +48,10 @@ class GetMyFlights(APIView):
         response = AirlineFacade.get_my_flights(request)
         return response
 
+
+"""
+More flights related views:
+"""
 
 class GetFlightsByParams(APIView):
     def get(self, request):

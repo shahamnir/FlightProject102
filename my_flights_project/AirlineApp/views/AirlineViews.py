@@ -30,12 +30,18 @@ class AirlineCreate(CreateAPIView):
     queryset = Airline.objects.all()
     serializer_class = AirlineSerializer
 
-
+"""
+Airline Facade View
+"""
 class DetailsAirline(APIView):
     def put(self, request, pk):
         response = AirlineFacade.update_airline(request, pk)
         return response
 
+
+"""
+More airline related views:
+"""
 
 class GetAirlineByUsername(APIView):
     def get(self, request):

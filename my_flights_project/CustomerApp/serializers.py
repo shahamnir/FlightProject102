@@ -12,6 +12,9 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Custumer
         fields = '__all__'
 
+    """
+    Uses create method to handle customer instance creation in order to create User instance when one created.
+    """
     def create(self, validated_data):
         user_role = UserRole.objects.get(id=3)
         user = User.objects.create(

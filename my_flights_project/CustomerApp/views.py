@@ -47,6 +47,10 @@ class GetTicketsByCustomer(APIView):
         return response
 
 
+"""
+CustomerFacade Views:
+"""
+
 class DetailsCustomer(APIView):
     def put(self, request, pk):
         response = CustomerFacade.update_customer(request, pk)

@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+
 
 app_name = "anonymous_app"
 urlpatterns = [
@@ -16,5 +17,4 @@ urlpatterns = [
     path('login/', views.LoginView.as_view()),
     path('register/', views.RegisterView.as_view()),
     path('add_customer/', views.AddCustomer.as_view()),
-
 ]
